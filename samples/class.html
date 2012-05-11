@@ -10,9 +10,22 @@
 <script type="text/javascript" src="../jquery.pager.min.js"></script>
 <script type="text/javascript">
 $(function() {
-	$('#pager').pager({
+	var pager = new Pager({
 		totalRec: 100,
-		currentPage: 5 	//現在のページ
+		element: $('#pager')
+	});
+	//ボタンをクリックしたら
+	$('#pager a').live('click', function(e) {
+		e.preventDefault();
+		//IE6-7対策
+		var hrefArr = $(this).attr('href').split('/');
+		var id = parseInt(hrefArr[hrefArr.length-1]);
+		//idをカレントとしてPager作成
+		pager.makeNav(id);
+	});
+	
+	$('#pager2 a').live('click', function(e) {
+		e.preventDefault();
 	});
 });
 </script>
